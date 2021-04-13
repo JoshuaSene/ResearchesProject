@@ -18,6 +18,7 @@ yarn add
 
 ```sh
 yarn typeorm migration:run
+yarn dev:server
 ```
 
 ## Author
