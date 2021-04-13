@@ -39,5 +39,3 @@ class Review {
 export default Review
 
 
-//expiration gtc (aberto até que concluido ou cancelado) e day (para o dia, fechou mercado a order vai embora)
-//
