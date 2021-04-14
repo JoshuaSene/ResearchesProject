@@ -6,7 +6,7 @@ import AppError from '../../errors/AppError';
 class PostBrandService {
 
     public async execute( request: Request, response: Response): Promise<Response>{
-
+        try{
         const {
             product,
             name,
@@ -35,6 +35,9 @@ class PostBrandService {
         const newBrand  = await brandRepository.save(brand)
 
         return response.json(newBrand)
+        } catch (e) {
+            throw new AppError(e.message, 500);
+        }
     }
 }
 export default new PostBrandService()

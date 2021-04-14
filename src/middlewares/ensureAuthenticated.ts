@@ -18,7 +18,7 @@ export default function ensureAuthenticated(
     next: NextFunction,
 ): void {
     const authHeader = request.headers.authorization;
-    console.log(authHeader)
+    // console.log(authHeader)
     if (!authHeader) {
         throw new AppError('JWT token is missing', 401);
     }
@@ -35,7 +35,7 @@ export default function ensureAuthenticated(
             id: sub,
             role: getNameRole[0]
         };
-console.log('REQUESTs USER ID',request.user.id)
+// console.log('REQUESTs USER ID',request.user.id)
         return next();
     } catch {
         throw new AppError('The token has been expired', 401);

@@ -23,7 +23,9 @@ class User {
 
     @Column()
     @Exclude()
-    @MinLength(8)
+    @MinLength(8, {
+    message: 'Title is too long',
+  })
     @MaxLength(30)
     password: string
 

@@ -29,11 +29,6 @@ export default async function ensureAuthenticated(
         const decoded = verify(token, authConfig.jwt.secret);
         const {sub} = decoded as ITokenPayload;
 
-        // const tokenStr = JSON.stringify(authHeader)
-        // const tokens = tokenStr.split(' ')
-
-        // const tokensFix = tokens[1].substr(0, tokens[1].length - 1)
-
         const getToken = await getConnection().query(
             `select *
                 from token
@@ -57,15 +52,6 @@ export default async function ensureAuthenticated(
         const newDate = d.setMinutes(d.getMinutes() + 2);
         console.log(newDate)
 
-        //     const insertAttExpires = await getConnection().query(
-        //         `UPDATE bd_trade.token
-        //     SET expires = DATE_ADD(expires , interval 60 MINUTE)
-        //     WHERE token = '${tokensFix}'`
-        //     )
-
-
-        // const difference = dateExp.getTime() - date.getTime();
-        // console.log('dif', difference )
         const getRoleId = await getConnection().query(
             `select *
             from role_users_users u

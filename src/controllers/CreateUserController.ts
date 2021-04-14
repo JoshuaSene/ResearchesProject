@@ -20,7 +20,7 @@ export default class CreateUserController {
             contactPhone: user.contact_phone,
             role: 'CLIENT'
         }
-        console.log(authReturn)
+        // console.log(authReturn)
 
         return response.json(classToClass(authReturn));
     }

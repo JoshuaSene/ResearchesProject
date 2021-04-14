@@ -7,7 +7,7 @@ import Review from '../../models/review';
 class CreateReviewService {
 
     public async execute( request: Request, response: Response): Promise<Response>{
-
+        try{
         const {
             evaluationNote,
             comment,
@@ -35,6 +35,10 @@ class CreateReviewService {
         const newReview  = await reviewRepository.save(review)
 
         return response.json(newReview)
+
+        } catch (e) {
+            throw new AppError(e.message, 500);
+        }
     }
 }
 export default new CreateReviewService()

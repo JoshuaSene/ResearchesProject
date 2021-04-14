@@ -23,6 +23,8 @@ interface IResponse {
 
 export default class AuthenticateUserService {
     public async execute({email, password}: IRequest): Promise<IResponse> {
+        try{
+
         const usersRepository = getRepository(User);
         const tokenRepository = getRepository(Token);
 
@@ -89,5 +91,8 @@ export default class AuthenticateUserService {
             role: getNameRole[0].name,
             token
         };
+        } catch (e) {
+            throw new AppError(e.message, 500);
+        }
     }
 }

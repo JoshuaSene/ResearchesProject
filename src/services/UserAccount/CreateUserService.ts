@@ -17,6 +17,7 @@ interface IRequest {
 export default class CreateUserService {
 
     public async execute({ id, name, email, document, password, contact_phone, status }: IRequest): Promise<User> {
+        try{
         const usersRepository = getRepository(User)
         const checkUserExists = await usersRepository.findOne({
             where: { email }
@@ -52,12 +53,15 @@ export default class CreateUserService {
             FROM role r
             WHERE name = 'client'`
             )
-            console.log(selectRole)
+            // console.log(selectRole)
             const insertRole = await getConnection().query(
                 `INSERT INTO role_users_users
                 ("roleId", "usersId") values ('${selectRole[0].id}', '${usr.id}')`
                 )
 
         return usr
+        } catch (e) {
+            throw new AppError(e.message, 500);
+        }
     }
 }

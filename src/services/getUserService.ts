@@ -4,6 +4,8 @@ import AppError from "../errors/AppError";
 
 class GetUserService {
     public async execute(request: Request, response: Response) : Promise<Response>{
+        try{
+
         const role = request.query.role
 
         if (!role){
@@ -30,8 +32,11 @@ class GetUserService {
             `
             )
 
+            return response.json(users)
 
-       return response.json(users)
+        } catch (e) {
+            throw new AppError(e.message, 500);
+        }
     }
 }
 export default new GetUserService()

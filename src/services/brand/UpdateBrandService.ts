@@ -7,7 +7,7 @@ import Brand from './../../models/Brand';
 
 class UpdateBrandService {
     public async execute(request: Request, response: Response): Promise<Response> {
-
+        try{
         const {
                 name,
                 product,
@@ -30,7 +30,9 @@ class UpdateBrandService {
               const brand: any = await brandsRepository.findOne(request.params.id);
               const mergeAcceptedOrders = brandsRepository.merge(brand, request.body);
               const results = await brandsRepository.save(mergeAcceptedOrders);
-              return response.send(results);
+              return response.send(results);              } catch (e) {
+            throw new AppError(e.message, 500);
+        }
     }
 }
 export default new UpdateBrandService()
